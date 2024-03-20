@@ -18,7 +18,7 @@ def call(String env) {
             stage('Build') {
                 steps {
                     script {
-                        JsonOutput.toJson(['a':1])
+                        print(JsonOutput.toJson(['a':1]))
                         print(env)
                         print(TARGET_REGION)
                     }
