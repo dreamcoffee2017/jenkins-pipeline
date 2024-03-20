@@ -1,3 +1,5 @@
+import groovy.json.JsonOutput
+
 def call(String env) {
     pipeline {
         agent any
@@ -18,6 +20,7 @@ def call(String env) {
             stage('Build') {
                 steps {
                     script {
+                        JsonOutput.toJson(['a':1])
                         print(env)
                         print(TARGET_REGION)
                     }
