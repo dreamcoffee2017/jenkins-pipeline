@@ -5,9 +5,7 @@ def call(String env) {
         agent any
         options {
             timestamps()
-        }
-        environment {
-
+            buildDiscarder(logRotator(numToKeepStr: '3'))
         }
         parameters {
             choice(
