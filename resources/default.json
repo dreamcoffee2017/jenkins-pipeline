@@ -1,0 +1,10 @@
+{
+  "regions": [
+    "us-east-1",
+    "us-east-2"
+  ],
+  "regionMap": {
+    "us-east-1": "use1",
+    "us-east-2": "use2"
+  }
+}
