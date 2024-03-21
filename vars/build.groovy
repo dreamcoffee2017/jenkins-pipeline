@@ -1,6 +1,8 @@
 def call(String env) {
-    def config = readJSON text: (libraryResource 'default.json')
-    def envCfg = readJSON text: (libraryResource "${env}.json")
+    def defStr = libraryResource 'default.json'
+    def envStr = libraryResource "${env}.json"
+    def config = readJSON text: defStr
+    def envCfg = readJSON text: envStr
     config.putAll(envCfg)
     print(config)
 
