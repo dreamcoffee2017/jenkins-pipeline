@@ -1,8 +1,6 @@
 1. defined in library 'share'.
 2. used to generate build-pipeline via environment specific config in resources.
 3. sample:
-<code>
 @Library('share') _
 
 build('dev')
-</code>
