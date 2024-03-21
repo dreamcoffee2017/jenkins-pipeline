@@ -1,7 +1,13 @@
 import groovy.json.JsonSlurper
 
-void call(String env) {
-    Map config = loadResource(env)
+def call(String env) {
+    String defStr = libraryResource 'default.json'
+    String envStr = libraryResource "${env}.json"
+    def jsonSlurper = new JsonSlurper()
+    def config = jsonSlurper.parseText(defStr) as Map
+    def envCfg = jsonSlurper.parseText(envStr) as Map
+    config.putAll(envCfg)
+
     pipeline {
         agent any
         options {
@@ -20,22 +26,12 @@ void call(String env) {
                 steps {
                     script {
                         print(env)
-                        print(REGION)
+                        print("${params.REGION}")
                         print(config['account'])
-                        print(config['regionMap'][REGION])
+                        print(config['regionMap']["${params.REGION}"])
                     }
                 }
             }
         }
     }
-}
-
-Map loadResource(String env) {
-    String defStr = libraryResource 'default.json'
-    String envStr = libraryResource "${env}.json"
-    JsonSlurper jsonSlurper = new JsonSlurper()
-    Map defCfg = jsonSlurper.parseText(defStr) as Map
-    Map envCfg = jsonSlurper.parseText(envStr) as Map
-    defCfg.putAll(envCfg)
-    return defCfg
 }
